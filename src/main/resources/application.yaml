@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: consoledb
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test_db
+    username: developer
+    password: password
+
+logging:
+  level:
+    root: INFO
