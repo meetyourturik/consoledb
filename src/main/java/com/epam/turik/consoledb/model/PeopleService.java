@@ -16,17 +16,21 @@ import java.util.Arrays;
 @Component
 public class PeopleService {
     @Autowired
-    private FileService      fileManager;
+    private FileService fileManager;
     @Autowired
-    private JsonService      jsonManager;
+    private JsonService jsonManager;
     @Autowired
     private PersonRepository personRepository;
 
-    public SaveResult saveData(String file_path) throws IOException {
-        String fileData = fileManager.readFile(file_path);
-        Person[] people = jsonManager.parseJson(fileData, Person[].class);
-        personRepository.saveAll(Arrays.asList(people));
-
-        return SaveResult.SUCCESS;
+    public SaveResult saveData(String filePath) {
+        try {
+            String fileData = fileManager.readFile(filePath);
+            Person[] people = jsonManager.parseJson(fileData, Person[].class);
+            personRepository.saveAll(Arrays.asList(people));
+            return SaveResult.SUCCESS;
+        } catch (IOException ex) {
+            log.error(ex.getLocalizedMessage());
+            return SaveResult.ERROR;
+        }
     }
 }

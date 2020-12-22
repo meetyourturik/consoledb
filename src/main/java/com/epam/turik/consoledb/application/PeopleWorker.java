@@ -1,6 +1,7 @@
 package com.epam.turik.consoledb.application;
 
 import com.epam.turik.consoledb.model.PeopleService;
+import com.epam.turik.consoledb.model.objects.SaveResult;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PeopleWorker {
     @Autowired
-    PeopleService service;
+    PeopleService peopleService;
 
     @Autowired
     Settings settings;
@@ -16,7 +17,12 @@ public class PeopleWorker {
     @SneakyThrows
     public void doWork() {
         String path = settings.getFilePath();
-        service.saveData(path);
+        SaveResult result = peopleService.saveData(path);
+        if (result == SaveResult.SUCCESS) {
+            System.out.println("success");
+        } else {
+            System.out.println("not success");
+        }
     }
 
 }
