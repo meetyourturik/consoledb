@@ -1,4 +1,4 @@
-package com.epam.turik.consoledb.model.person;
+package com.epam.turik.consoledb.data.objects;
 
 import lombok.Data;
 

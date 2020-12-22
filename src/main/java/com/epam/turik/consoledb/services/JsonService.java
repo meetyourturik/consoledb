@@ -1,10 +1,10 @@
-package com.epam.turik.consoledb.data;
+package com.epam.turik.consoledb.services;
 
 import com.google.gson.Gson;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class JsonManager {
+@Service
+public class JsonService {
     private final Gson gson = new Gson();
 
     public <T> T parseJson(String json, Class<T> clazz) {

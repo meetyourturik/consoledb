@@ -1,17 +1,15 @@
 package com.epam.turik.consoledb;
 
-import com.epam.turik.consoledb.application.Worker;
+import com.epam.turik.consoledb.application.PeopleWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.IOException;
-
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 	@Autowired
-	private Worker worker;
+	private PeopleWorker worker;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -19,10 +17,6 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		try {
-			worker.doWork();
-		} catch (IOException ex) {
-			throw new RuntimeException(ex);
-		}
+		worker.doWork();
 	}
 }
