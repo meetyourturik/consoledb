@@ -1,22 +1,27 @@
 package com.epam.turik.consoledb;
 
+import com.epam.turik.consoledb.config.TestConfig;
 import com.epam.turik.consoledb.data.PersonRepository;
 import com.epam.turik.consoledb.data.objects.Person;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.DefaultApplicationArguments;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
-@RunWith(SpringRunner.class)
-@SpringBootTest(args = {"--file=./files/people.json"})
+@SpringBootTest(classes = TestConfig.class)
 class DummyTest {
+	@Autowired
+	ApplicationArguments args;
+
 	@Autowired
 	PersonRepository personRepository;
 

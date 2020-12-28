@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Settings {
-    private String filePath;
+    private final String filePath;
 
     @Autowired
     Settings(ApplicationArguments args) {
