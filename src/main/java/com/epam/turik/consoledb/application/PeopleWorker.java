@@ -18,7 +18,7 @@ public class PeopleWorker {
 
     @SneakyThrows
     public void doWork() {
-        String path = settings.getFilePath();
+        String     path   = settings.getFilePath();
         SaveResult result = peopleService.saveData(path);
         if (result == SaveResult.SUCCESS) {
             log.debug("success");
