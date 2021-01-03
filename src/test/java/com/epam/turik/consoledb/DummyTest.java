@@ -7,6 +7,7 @@ import com.epam.turik.consoledb.data.objects.Person;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.ClassRule;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @Slf4j
@@ -71,19 +71,24 @@ class DummyTest {
 		when(settings.getFilePath()).thenReturn(peopleFile.getAbsolutePath());
 		Person[] people = generatePeople();
 		writeToFile(peopleFile, people);
+
 		worker.doWork();
+
 		List<Person> peopleList = new ArrayList<>();
 		personRepository.findAll().forEach(peopleList::add);
 		Person[] newPeople = peopleList.toArray(new Person[0]);
-		assertEquals(newPeople.length, people.length);
+
+		Assertions.assertEquals(newPeople.length, people.length);
 		for (int i = 0; i < newPeople.length; i++) {
-			assert(newPeople[i].getHascat() == people[i].getHascat() && newPeople[i].getName().equals(people[i].getName()) && newPeople[i].getAge().equals(people[i].getAge()));
+			Assertions.assertEquals(newPeople[i].getName(), people[i].getName());
+			Assertions.assertEquals(newPeople[i].getAge(), people[i].getAge());
+			Assertions.assertEquals(newPeople[i].getHascat(), people[i].getHascat());
 		}
 	}
 
 	@SneakyThrows
 	void writeToFile(File file, Person[] people) {
-		FileUtils.writeStringToFile(file, generatePeopleFile(people));// generatePeopleFile(generatePeople()));
+		FileUtils.writeStringToFile(file, generatePeopleFile(people));
 	}
 
 	private String generatePeopleFile(Person[] people) {
