@@ -13,6 +13,7 @@ import org.junit.rules.TemporaryFolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -29,10 +30,9 @@ import static org.mockito.Mockito.when;
 
 @Slf4j
 @Testcontainers
+@ActiveProfiles("test")
 @SpringBootTest
 class DummyTest {
-	@MockBean
-	Application application;
 
 	@ClassRule
 	String[] names = {"Petya", "Vasya", "Ilya", "Nastya", "Katya", "Pasha", "Lenya", "Jenya"};
@@ -73,7 +73,6 @@ class DummyTest {
 		writeToFile(peopleFile, people);
 
 		worker.doWork();
-
 		List<Person> peopleList = new ArrayList<>();
 		personRepository.findAll().forEach(peopleList::add);
 		Person[] newPeople = peopleList.toArray(new Person[0]);
@@ -83,6 +82,7 @@ class DummyTest {
 			Assertions.assertEquals(newPeople[i].getName(), people[i].getName());
 			Assertions.assertEquals(newPeople[i].getAge(), people[i].getAge());
 			Assertions.assertEquals(newPeople[i].getHascat(), people[i].getHascat());
+			log.warn(newPeople[i].toString());
 		}
 	}
 

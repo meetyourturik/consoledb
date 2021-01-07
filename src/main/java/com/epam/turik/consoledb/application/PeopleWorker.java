@@ -26,5 +26,4 @@ public class PeopleWorker {
             log.warn("not success");
         }
     }
-
 }
