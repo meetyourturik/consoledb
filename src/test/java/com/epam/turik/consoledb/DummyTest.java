@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
 @Slf4j
 @Testcontainers
 @ActiveProfiles("test")
-@SpringBootTest
+@SpringBootTest(classes = TestConfig.class)
 class DummyTest {
 
 	@ClassRule

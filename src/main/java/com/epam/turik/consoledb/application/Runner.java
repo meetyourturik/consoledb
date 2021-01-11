@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Profile("!test")
 @Component
 public class Runner implements CommandLineRunner {
-
     @Autowired
     private PeopleWorker peopleWorker;
 
