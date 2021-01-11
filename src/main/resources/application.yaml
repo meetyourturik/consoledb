@@ -1,8 +1,4 @@
 spring:
-  # supposedly auto finishes app, but actually not
-  main:
-    web-application-type: none
-
   application:
     name: consoledb
 

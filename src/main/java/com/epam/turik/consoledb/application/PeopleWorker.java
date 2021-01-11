@@ -21,7 +21,7 @@ public class PeopleWorker {
         String path = settings.getFilePath();
         SaveResult result = peopleService.saveData(path);
         if (result == SaveResult.SUCCESS) {
-            log.debug("success");
+            log.warn("success");
         } else {
             log.warn("not success");
         }
