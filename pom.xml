@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.epam.turik</groupId>
 	<artifactId>consoledb</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>console-db</name>
 	<description>storing data from json into db</description>
 
@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>1.14.3</version>
+			<version>${testcontainers.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

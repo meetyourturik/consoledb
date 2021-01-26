@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.ClassRule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.io.TempDir;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
 @Slf4j
 @Testcontainers
 @ActiveProfiles("test")
-@SpringBootTest(classes = TestConfig.class)
+@SpringBootTest
 class DummyTest {
 
 	@ClassRule
@@ -62,12 +62,14 @@ class DummyTest {
 		registry.add("spring.datasource.username", postgreSQLContainer::getUsername);
 	}
 
+	@TempDir
+	File temporaryFolder;
+
 	@SneakyThrows
 	@Test
 	void test() {
-		TemporaryFolder temporaryFolder = new TemporaryFolder();
-		temporaryFolder.create();
-		File peopleFile = temporaryFolder.newFile("people.json");
+		File peopleFile = new File(temporaryFolder, "people.json");
+		assert peopleFile.createNewFile();
 		when(settings.getFilePath()).thenReturn(peopleFile.getAbsolutePath());
 		Person[] people = generatePeople();
 		writeToFile(peopleFile, people);

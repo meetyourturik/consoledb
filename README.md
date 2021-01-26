@@ -1,7 +1,7 @@
 # consoledb
-storing data from json into db using java
+storing data from json into db using spring and flyway
 
-<s>testing with testcontainers</s>
+testing with testcontainers
 
 run arguments for idea: 
 > --file=./files/people.json
